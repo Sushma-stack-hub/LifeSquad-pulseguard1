@@ -2,7 +2,7 @@
    PulseGuard AI Chatbot Logic
 ================================ */
 
-const CHATBOT_API = "http://127.0.0.1:5001/api/chatbot/ask";
+const CHATBOT_API = "https://lifesquad-pulseguard1.onrender.com/api/chatbot/ask";
 
 let chatOpen = false;
 
