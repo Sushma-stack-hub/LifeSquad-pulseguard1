@@ -3106,6 +3106,14 @@
           </div>
           <div class="lf-error" id="pe"></div>
           <button class="lf-submit pat-btn" onclick="doLogin('patient')">Sign In to My Health Portal →</button>
+
+          <!-- NEW: Google Login Button -->
+          <div style="text-align: center; margin: 15px 0; color: rgba(255,255,255,0.4); font-size: 0.8rem;">— OR —</div>
+          <button id="google-login-btn" class="lf-submit pat-btn" style="background: white; color: #1A1008;">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width: 18px; margin-right: 8px;">
+            Sign in with Google
+          </button>
+          
           <div class="lf-hint">💡 Demo — username: <strong>jane</strong> &nbsp;·&nbsp; password: <strong>1234</strong>
           </div>
         </div>
@@ -3776,455 +3784,6 @@
               <p style="font-size:.85rem;color:var(--mid);margin-top:5px;line-height:1.65">If your doctor prescribed
                 medication, take it every day even when you feel fine. Missing doses is one of the most common reasons
                 BP stays high.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════
-     DOCTOR DASHBOARD
-══════════════════════════════════════ -->
-  <div id="pg-doctor" class="pg">
-    <nav class="d-nav">
-      <div class="d-logo">
-        <div class="d-logo-mk">💓</div>
-        <div class="d-logo-tp">PULSE<span>GUARD</span> AI<span class="d-logo-bg">CLINICAL</span></div>
-      </div>
-      <div class="d-nav-links">
-        <button class="d-nav-btn on" onclick="dPanel('d-ov')">Overview</button>
-        <button class="d-nav-btn" onclick="dPanel('d-pts')">Patients</button>
-        <button class="d-nav-btn" onclick="dPanel('d-alerts')">Alerts</button>
-        <button class="d-nav-btn" onclick="dPanel('d-assess')">Assessment</button>
-        <button class="d-nav-btn" onclick="dPanel('d-chat')">Messages</button>
-      </div>
-      <div class="d-nav-r">
-        <span>👨‍⚕️</span>
-        <span class="d-ubadge" id="dNavName">Dr. Sharma</span>
-        <button class="btn-dso" onclick="signout()">Sign Out</button>
-      </div>
-    </nav>
-    <div class="d-body">
-      <div class="d-side">
-        <div class="d-side-sec">Dashboard</div>
-        <ul class="d-side-menu">
-          <li><a class="on" onclick="dPanel('d-ov')">📊 Overview</a></li>
-          <li><a onclick="dPanel('d-pts')">👥 My Patients</a></li>
-          <li><a onclick="dPanel('d-alerts')">🚨 Alerts <span
-                style="background:#ef4444;color:white;font-size:.63rem;font-weight:700;padding:1px 6px;border-radius:100px;margin-left:3px">2</span></a>
-          </li>
-        </ul>
-        <div class="d-side-sec">Tools</div>
-        <ul class="d-side-menu">
-          <li><a onclick="dPanel('d-assess')">🔬 Patient Assessment</a></li>
-          <li><a onclick="dPanel('d-chat')">💬 Patient Messages</a></li>
-        </ul>
-      </div>
-      <div style="overflow-y:auto">
-
-        <!-- Overview -->
-        <div class="d-panel on" id="d-ov">
-          <h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.5px;margin-bottom:3px">Welcome
-            back, <span id="dFirstName">Dr. Sharma</span></h2>
-          <p style="color:var(--dm);font-size:.85rem;margin-bottom:20px">Clinical Portal · Feb 18, 2026</p>
-          <div class="d-stats">
-            <div class="d-stat">
-              <div class="d-stat-n">12</div>
-              <div class="d-stat-l">Active Patients</div>
-            </div>
-            <div class="d-stat">
-              <div class="d-stat-n" style="color:#ef4444">2</div>
-              <div class="d-stat-l">High Alerts Today</div>
-            </div>
-            <div class="d-stat">
-              <div class="d-stat-n" style="color:#ffb020">3</div>
-              <div class="d-stat-l">Moderate Alerts</div>
-            </div>
-            <div class="d-stat">
-              <div class="d-stat-n">95.2%</div>
-              <div class="d-stat-l">Model Accuracy</div>
-            </div>
-          </div>
-          <div class="d-sec-title">Recent Alerts</div>
-          <div class="alert-list" style="max-width:780px;margin-bottom:24px">
-            <div class="al-item">
-              <div class="al-ico">🚨</div>
-              <div class="al-info">
-                <div class="al-name">Jane Doe — PT-2024-001</div>
-                <div class="al-detail">Risk drift: 30% → 78% over 3 visits · Stage 2 Hypertension</div>
-              </div>
-              <div class="al-time">2h ago</div><span class="al-badge alb-hi">HIGH</span><button class="btn-cp"
-                onclick="openDChat('jane')">💬 Message</button>
-            </div>
-            <div class="al-item">
-              <div class="al-ico">⚠️</div>
-              <div class="al-info">
-                <div class="al-name">Raj Kumar — PT-2024-007</div>
-                <div class="al-detail">Risk drift: 40% → 62% over 2 visits · Stage 1 borderline</div>
-              </div>
-              <div class="al-time">5h ago</div><span class="al-badge alb-md">MODERATE</span><button class="btn-cp"
-                onclick="openDChat('raj')">💬 Message</button>
-            </div>
-          </div>
-          <div class="d-sec-title">Patient Quick View</div>
-          <div class="pt-wrap" style="max-width:880px">
-            <table class="pt-tbl">
-              <thead>
-                <tr>
-                  <th>Patient</th>
-                  <th>Last BP</th>
-                  <th>Risk</th>
-                  <th>Stage</th>
-                  <th>Alert</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Jane Doe</div>
-                    <div class="pt-id">PT-2024-001</div>
-                  </td>
-                  <td>145/92</td>
-                  <td><strong style="color:#E8402A">78%</strong></td>
-                  <td><span class="rp rp-2">Stage 2</span></td>
-                  <td><span class="ap ap-hi">HIGH</span></td>
-                  <td><button class="btn-cp" onclick="openDChat('jane')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Raj Kumar</div>
-                    <div class="pt-id">PT-2024-007</div>
-                  </td>
-                  <td>135/84</td>
-                  <td><strong style="color:#F59E0B">62%</strong></td>
-                  <td><span class="rp rp-1">Stage 1</span></td>
-                  <td><span class="ap ap-md">MODERATE</span></td>
-                  <td><button class="btn-cp" onclick="openDChat('raj')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Priya Nair</div>
-                    <div class="pt-id">PT-2024-012</div>
-                  </td>
-                  <td>118/76</td>
-                  <td><strong style="color:#2D7D5A">22%</strong></td>
-                  <td><span class="rp rp-n">Normal</span></td>
-                  <td><span class="ap ap-ok">STABLE</span></td>
-                  <td><button class="btn-cp" onclick="openDChat('priya')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Arun Mehta</div>
-                    <div class="pt-id">PT-2024-018</div>
-                  </td>
-                  <td>125/80</td>
-                  <td><strong style="color:#2D7D5A">35%</strong></td>
-                  <td><span class="rp rp-n">Normal</span></td>
-                  <td><span class="ap ap-ok">STABLE</span></td>
-                  <td><button class="btn-cp" onclick="openDChat('arun')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Sunita Rao</div>
-                    <div class="pt-id">PT-2024-023</div>
-                  </td>
-                  <td>158/98</td>
-                  <td><strong style="color:#E8402A">85%</strong></td>
-                  <td><span class="rp rp-c">Crisis Risk</span></td>
-                  <td><span class="ap ap-hi">HIGH</span></td>
-                  <td><button class="btn-cp" onclick="openDChat('sunita')">💬 Chat</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- All Patients -->
-        <div class="d-panel" id="d-pts">
-          <h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.5px;margin-bottom:3px">My
-            Patients</h2>
-          <p style="color:var(--dm);font-size:.85rem;margin-bottom:20px">Full patient list with risk scores and actions
-          </p>
-          <div class="pt-wrap">
-            <table class="pt-tbl">
-              <thead>
-                <tr>
-                  <th>Patient</th>
-                  <th>Age</th>
-                  <th>Last BP</th>
-                  <th>Risk</th>
-                  <th>Stage</th>
-                  <th>Alert</th>
-                  <th>Last Visit</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Jane Doe</div>
-                    <div class="pt-id">PT-2024-001</div>
-                  </td>
-                  <td>48</td>
-                  <td>145/92</td>
-                  <td><strong style="color:#E8402A">78%</strong></td>
-                  <td><span class="rp rp-2">Stage 2</span></td>
-                  <td><span class="ap ap-hi">HIGH</span></td>
-                  <td>Feb 15</td>
-                  <td><button class="btn-cp" onclick="openDChat('jane')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Raj Kumar</div>
-                    <div class="pt-id">PT-2024-007</div>
-                  </td>
-                  <td>55</td>
-                  <td>135/84</td>
-                  <td><strong style="color:#F59E0B">62%</strong></td>
-                  <td><span class="rp rp-1">Stage 1</span></td>
-                  <td><span class="ap ap-md">MODERATE</span></td>
-                  <td>Feb 13</td>
-                  <td><button class="btn-cp" onclick="openDChat('raj')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Priya Nair</div>
-                    <div class="pt-id">PT-2024-012</div>
-                  </td>
-                  <td>34</td>
-                  <td>118/76</td>
-                  <td><strong style="color:#2D7D5A">22%</strong></td>
-                  <td><span class="rp rp-n">Normal</span></td>
-                  <td><span class="ap ap-ok">STABLE</span></td>
-                  <td>Feb 10</td>
-                  <td><button class="btn-cp" onclick="openDChat('priya')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Arun Mehta</div>
-                    <div class="pt-id">PT-2024-018</div>
-                  </td>
-                  <td>41</td>
-                  <td>125/80</td>
-                  <td><strong style="color:#2D7D5A">35%</strong></td>
-                  <td><span class="rp rp-n">Normal</span></td>
-                  <td><span class="ap ap-ok">STABLE</span></td>
-                  <td>Feb 8</td>
-                  <td><button class="btn-cp" onclick="openDChat('arun')">💬 Chat</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="pt-nm">Sunita Rao</div>
-                    <div class="pt-id">PT-2024-023</div>
-                  </td>
-                  <td>62</td>
-                  <td>158/98</td>
-                  <td><strong style="color:#E8402A">85%</strong></td>
-                  <td><span class="rp rp-c">Crisis Risk</span></td>
-                  <td><span class="ap ap-hi">HIGH</span></td>
-                  <td>Feb 17</td>
-                  <td><button class="btn-cp" onclick="openDChat('sunita')">💬 Chat</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Alerts -->
-        <div class="d-panel" id="d-alerts">
-          <h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.5px;margin-bottom:3px">
-            Clinical Alerts</h2>
-          <p style="color:var(--dm);font-size:.85rem;margin-bottom:20px">Patients requiring immediate attention</p>
-          <div class="alert-list" style="max-width:800px">
-            <div class="al-item">
-              <div class="al-ico">🚨</div>
-              <div class="al-info">
-                <div class="al-name">Jane Doe — PT-2024-001</div>
-                <div class="al-detail">Risk drift: 30% → 78% (+48pp) · Stage 2 · BP 145/92 mmHg</div>
-              </div>
-              <div class="al-time">2h ago</div><span class="al-badge alb-hi">HIGH</span><button class="btn-cp"
-                onclick="openDChat('jane')">💬 Message</button>
-            </div>
-            <div class="al-item">
-              <div class="al-ico">🚨</div>
-              <div class="al-info">
-                <div class="al-name">Sunita Rao — PT-2024-023</div>
-                <div class="al-detail">Crisis Risk · BP 158/98 · Age 62 · Multiple risk factors present</div>
-              </div>
-              <div class="al-time">6h ago</div><span class="al-badge alb-hi">HIGH</span><button class="btn-cp"
-                onclick="openDChat('sunita')">💬 Message</button>
-            </div>
-            <div class="al-item">
-              <div class="al-ico">⚠️</div>
-              <div class="al-info">
-                <div class="al-name">Raj Kumar — PT-2024-007</div>
-                <div class="al-detail">Risk drift: 40% → 62% (+22pp) · Positive slope trend detected</div>
-              </div>
-              <div class="al-time">5h ago</div><span class="al-badge alb-md">MODERATE</span><button class="btn-cp"
-                onclick="openDChat('raj')">💬 Message</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Assessment -->
-        <div class="d-panel" id="d-assess">
-          <h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.5px;margin-bottom:3px">Patient
-            Risk Assessment</h2>
-          <p style="color:var(--dm);font-size:.85rem;margin-bottom:20px">Enter patient data for AI-powered hypertension
-            risk evaluation</p>
-          <div class="da-form">
-            <div class="da-h3">📋 Patient Data Entry</div>
-            <div class="da-sub">Enter patient vitals and clinical history for risk assessment</div>
-            <div class="da-row">
-              <div class="da-fld"><label>Age</label><input type="number" id="da-age" placeholder="45"></div>
-              <div class="da-fld"><label>Gender</label><select id="da-gen">
-                  <option value="">Select…</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Other</option>
-                </select></div>
-              <div class="da-fld"><label>Patient ID</label><input type="text" id="da-pid" placeholder="PT-2024-XXX">
-              </div>
-            </div>
-            <div class="da-row">
-              <div class="da-fld"><label>Weight (kg)</label><input type="number" id="da-w" placeholder="75"
-                  oninput="calcBMI()"></div>
-              <div class="da-fld"><label>Height (cm)</label><input type="number" id="da-h" placeholder="170"
-                  oninput="calcBMI()"></div>
-              <div class="da-fld"><label>BMI (auto)</label><input type="text" id="da-bmi" placeholder="—" readonly
-                  style="background:#fafafa"></div>
-            </div>
-            <div class="da-row2">
-              <div class="da-fld"><label>Systolic BP (mmHg)</label><input type="number" id="da-sys" placeholder="140">
-              </div>
-              <div class="da-fld"><label>Diastolic BP (mmHg)</label><input type="number" id="da-dia" placeholder="90">
-              </div>
-            </div>
-            <div class="da-row">
-              <div class="da-fld"><label>Family History of HTN</label><select id="da-fam">
-                  <option value="">Select…</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                  <option value="unknown">Unknown</option>
-                </select></div>
-              <div class="da-fld"><label>Symptom Severity</label><select id="da-sym">
-                  <option value="">Select…</option>
-                  <option value="none">Asymptomatic</option>
-                  <option value="mild">Mild</option>
-                  <option value="moderate">Moderate</option>
-                  <option value="severe">Severe</option>
-                </select></div>
-              <div class="da-fld"><label>On BP Medication?</label><select id="da-med">
-                  <option value="">Select…</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select></div>
-            </div>
-            <button class="btn-da" onclick="runAssess()">🔬 Generate Risk Assessment</button>
-          </div>
-          <div class="da-result" id="da-res">
-            <div
-              style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:1.5px solid var(--border)">
-              <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.5px">Risk Assessment Report
-              </div>
-              <div style="font-size:11px;color:var(--dm);font-weight:600;text-transform:uppercase" id="da-ts"></div>
-            </div>
-            <div class="da-rnum" id="da-rn" style="color:var(--grn)">—</div>
-            <div class="da-rstage" id="da-rs"></div>
-            <div class="da-bar">
-              <div class="da-bar-fill" id="da-bf" style="width:0;background:var(--grn)"></div>
-            </div>
-            <div class="da-notebox">
-              <div class="da-notelbl">Clinical Recommendation</div>
-              <div style="font-size:13px;color:var(--black);line-height:1.7" id="da-note"></div>
-            </div>
-            <div id="da-factors"></div>
-            <button class="btn-cp" style="padding:11px 20px;border-radius:8px;font-size:13px;margin-top:8px"
-              onclick="dPanel('d-chat')">💬 Message Patient</button>
-          </div>
-        </div>
-
-        <!-- Doctor Chat -->
-        <div class="d-panel" id="d-chat" style="padding:0">
-          <div class="d-inbox" style="height:calc(100vh - 60px)">
-            <div class="conv-list">
-              <div class="cl-top">
-                <h3>Patient Messages</h3>
-                <p>Your patient conversations</p>
-              </div>
-              <div class="cl-scroll">
-                <div class="ci on" id="dci-jane" onclick="selDConv('jane',this)">
-                  <div class="ci-av" style="background:#E8402A">JD</div>
-                  <div class="ci-info">
-                    <div class="ci-name">Jane Doe <span style="font-size:.68rem;color:var(--dm)">PT-001</span></div>
-                    <div class="ci-prev">I've been feeling dizzy...</div>
-                  </div>
-                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-                    <div class="ci-time">2h ago</div>
-                    <div class="ci-unread">2</div>
-                  </div>
-                </div>
-                <div class="ci" id="dci-raj" onclick="selDConv('raj',this)">
-                  <div class="ci-av" style="background:#F59E0B">RK</div>
-                  <div class="ci-info">
-                    <div class="ci-name">Raj Kumar <span style="font-size:.68rem;color:var(--dm)">PT-007</span></div>
-                    <div class="ci-prev">When should I come back?</div>
-                  </div>
-                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-                    <div class="ci-time">5h ago</div>
-                  </div>
-                </div>
-                <div class="ci" id="dci-priya" onclick="selDConv('priya',this)">
-                  <div class="ci-av" style="background:#2D7D5A">PN</div>
-                  <div class="ci-info">
-                    <div class="ci-name">Priya Nair <span style="font-size:.68rem;color:var(--dm)">PT-012</span></div>
-                    <div class="ci-prev">Thank you doctor!</div>
-                  </div>
-                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-                    <div class="ci-time">3d ago</div>
-                  </div>
-                </div>
-                <div class="ci" id="dci-sunita" onclick="selDConv('sunita',this)">
-                  <div class="ci-av" style="background:#7C3AED">SR</div>
-                  <div class="ci-info">
-                    <div class="ci-name">Sunita Rao <span style="font-size:.68rem;color:var(--dm)">PT-023</span></div>
-                    <div class="ci-prev">I've been having headaches...</div>
-                  </div>
-                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-                    <div class="ci-time">6h ago</div>
-                    <div class="ci-unread">1</div>
-                  </div>
-                </div>
-                <div class="ci" id="dci-arun" onclick="selDConv('arun',this)">
-                  <div class="ci-av" style="background:#0ea5e9">AM</div>
-                  <div class="ci-info">
-                    <div class="ci-name">Arun Mehta <span style="font-size:.68rem;color:var(--dm)">PT-018</span></div>
-                    <div class="ci-prev">Feeling good this week!</div>
-                  </div>
-                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-                    <div class="ci-time">Feb 14</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="chat-win">
-              <div class="cw-top">
-                <div class="cw-av" id="dcwAv" style="background:#E8402A">JD</div>
-                <div>
-                  <div class="cw-name" id="dcwName">Jane Doe</div>
-                  <div class="cw-status">Active Patient</div>
-                </div>
-                <div class="cw-tag" id="dcwTag">78% Risk · Stage 2 · HIGH ALERT</div>
-              </div>
-              <div class="chat-msgs" id="dMsgs"></div>
-              <div class="cw-input">
-                <input class="cw-txt" id="dMsgIn" placeholder="Reply to patient…"
-                  onkeypress="if(event.key==='Enter')sendDMsg()" style="border-color:var(--border)" />
-                <button class="btn-snd" onclick="sendDMsg()" style="background:var(--grn);color:var(--black)">➤</button>
-              </div>
             </div>
           </div>
         </div>
@@ -5197,6 +4756,61 @@
 
   <!-- CHATBOT JAVASCRIPT -->
   <script src="chatbot.js?v=5"></script>
+
+  <!-- FIREBASE GOOGLE AUTHENTICATION -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCaMzSwUlQG2fkCpyBGI7ihFOSjqcorKkk",
+      authDomain: "pulseguard-f7a08.firebaseapp.com",
+      projectId: "pulseguard-f7a08",
+      storageBucket: "pulseguard-f7a08.firebasestorage.app",
+      messagingSenderId: "364675531658",
+      appId: "1:364675531658:web:9523e836dfae873223be73",
+      measurementId: "G-9QZF7K23PJ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    const googleBtn = document.getElementById('google-login-btn');
+    if (googleBtn) {
+      googleBtn.addEventListener('click', async () => {
+        try {
+          const result = await signInWithPopup(auth, provider);
+          const idToken = await result.user.getIdToken();
+          
+          // Send token to your Python Backend
+          const res = await fetch(`${API}/api/auth/google`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: idToken, role: 'patient' }) 
+          });
+
+          const data = await res.json();
+          
+          if (res.ok) {
+            // Log the user in on the frontend
+            saveSession(data.token, data.user);
+            document.getElementById('pNavName').textContent = data.user.name;
+            document.getElementById('pNavAv').textContent = data.user.name.split(' ').map(w => w[0]).join('').substring(0, 2);
+            document.getElementById('pFirstName').textContent = data.user.name.split(' ')[0];
+            show('patient'); 
+            pPanel('p-ov');
+            initPChat();
+          } else {
+            alert("Login Failed: " + data.error);
+          }
+        } catch (error) {
+          console.error("Firebase Error:", error);
+          alert("Could not sign in with Google.");
+        }
+      });
+    }
+  </script>
 
 </body>
 
